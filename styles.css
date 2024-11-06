@@ -1,0 +1,197 @@
+/* General Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1E3A8A, #0F172A); /* Dark blue and green carbon fiber look */
+  color: white;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+}
+
+/* Login Page Styles */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+}
+
+
+.login-container {
+  background-color: rgba(0, 0, 0, 0.7); /* Transparent dark background */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  text-align: center;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #45a049;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+
+  background-color: #333;
+}
+
+/* Hamburger Icon */
+.hamburger-icon {
+  cursor: pointer;
+  font-size: 30px;
+  padding: 10px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 30px;
+  background-color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid #444;
+}
+
+.dropdown-menu a:hover {
+  background-color: #444;
+}
+
+/* Client Details Section */
+.client-details-section {
+  background-color: rgba(0, 0, 0, 0.7); /* Transparent dark background */
+  padding: 20px;
+
+  border-radius: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Form Inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 5px;
+  background-color: #222;
+  border: none;
+  color: white;
+  border-radius: 5px;
+
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Save Button */
+.save-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+/* Leads Section */
+#my-leads-section {
+  display: none;
+}
+
+.lead-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.lead-item button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.lead-item button:hover {
+  background-color: #1976D2;
+}
+
+/* Search Box Styles */
+#search {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
+}
+
+/* Home Button in Dropdown */
+.dropdown-menu a.home-button {
+  background-color: #FF9800;
+
+  color: white;
+}
+
+.dropdown-menu a.home-button:hover {
+  background-color: #F57C00;
+}

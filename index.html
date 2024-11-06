@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Management CRM</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyARBYmY_LP2fZShbCl_NvTsr5ypDM6JbaE",
+      authDomain: "my-log-
+
+book-9c011.firebaseapp.com",
+      databaseURL: "https://my-log-book-9c011-default-rtdb.firebaseio.com",
+      projectId: "my-log-book-9c011",
+      storageBucket: "my-log-book-9c011.firebasestorage.app",
+      messagingSenderId: "384626859494",
+      appId: "1:384626859494:web:2507f6643e9856d0138a27",
+      measurementId: "G-GV7XCJ4J30"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, 
+
+#4CAF50, #2196F3);
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .login-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #333;
+    }
+
+    .login-container {
+      background-color: #444;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 300px;
+
+      text-align: center;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #222;
+      color: white;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background-color: #45a049;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #333;
+    }
+
+    .menu-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .hamburger-icon {
+
+      cursor: pointer;
+      font-size: 30px;
+      padding: 10px;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background-color: #333;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .dropdown-menu a {
+      display: block;
+
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #444;
+    }
+
+    .container {
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 5px;
+      background-color: #222;
+      border: none;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .save-btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .save-btn:hover {
+      background-color: #45a049;
+    }
+
+
+    .lead-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+
+    .lead-item button {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .lead-item button:hover {
+
+      background-color: #1976D2;
+    }
+
+    .comment-section {
+      height: 100px;
+    }
+
+    /* Styling for the client details section */
+    .client-details-section {
+      background-color: #2c2c2c;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div id="login-page" class="login-page">
+    <div class="login-container">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Log In</button>
+    </div>
+  </div>
+
+  <!-- Header (Only visible after login) -->
+  <header id="header" style="display: none;">
+    <div class="menu-container">
+
+      <button class="hamburger-icon" onclick="toggleDropdown()">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Dropdown Menu -->
+  <div class="dropdown-menu" id="dropdown-menu">
+    <a href="javascript:void(0)" onclick="showLeads()">My Leads</a>
+    <a href="javascript:void(0)" onclick="logOut()">Log Out</a>
+    <a href="javascript:void(0)" onclick="goHome()">Home</a>
+  </div>
+
+  <!-- Client Details Section (Only visible after login) -->
+  <div class="container" id="client-details-container" style="display: none;">
+
+    <h1>Client Details</h1>
+    <div class="client-details-section">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter name">
+      </div>
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" placeholder="Enter surname">
+      </div>
+      <div class="form-group">
+        <label for="id-number">ID Number</label>
+        <input type="text" id="id-number" placeholder="Enter ID number">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+
+        <input type="email" id="email" placeholder="Enter email address">
+      </div>
+      <div class="form-group">
+        <label for="membership-number">Membership Number</label>
+        <input type="text" id="membership-number" placeholder="Enter membership number">
+      </div>
+      <div class="form-group">
+        <label for="contact-number">Contact Number</label>
+        <input type="text" id="contact-number" placeholder="Enter contact number">
+      </div>
+      <div class="form-group">
+        <label for="comments">Comments</label>
+        <textarea id="comments" placeholder="Enter comments" 
+
+class="comment-section"></textarea>
+      </div>
+      <button class="save-btn" onclick="saveClient()">Save</button>
+    </div>
+  </div>
+
+  <!-- My Leads Section -->
+  <div id="my-leads-section" style="display: none;">
+    <h2>My Leads</h2>
+    <input type="text" id="search" oninput="searchLeads()" placeholder="Search leads...">
+    <ul id="leads-list"></ul>
+  </div>
+
+  <script>
+    let clients = [];
+    let loggedIn = false;
+
+    // Login function
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username === "kay@tendaonline.co.za" && password === "K@y5clients") {
+        loggedIn = true;
+        document.getElementById("login-page").style.display = "none";
+        document.getElementById("header").style.display = "flex";
+        document.getElementById("client-details-container").style.display = "block";
+        document.getElementById("my-leads-
+
+section").style.display = "none";
+      } else {
+        alert("Invalid login credentials");
+      }
+    }
+
+    // Logout function
+    function logOut() {
+      loggedIn = false;
+      document.getElementById("login-page").style.display = "flex";
+      document.getElementById("header").style.display = "none";
+      document.getElementById("client-details-container").style.display = "none";
+      document.getElementById("my-leads-section").style.display = "none";
+    }
+
+    // Toggle dropdown menu
+
+    function toggleDropdown() {
+      const dropdownMenu = document.getElementById("dropdown-menu");
+      dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    }
+
+    // Show My Leads
+    function showLeads() {
+      document.getElementById("my-leads-section").style.display = "block";
+      document.getElementById("client-details-container").style.display = "none";
+    }
+
+    // Go to Home
+    function goHome() {
+      document.getElementById("client-details-container").style.display = "block";
+
+      document.getElementById("my-leads-section").style.display = "none";
+    }
+
+    // Save Client function
+    function saveClient() {
+      const client = {
+        name: document.getElementById("name").value,
+        surname: document.getElementById("surname").value,
+        idNumber: document.getElementById("id-number").value,
+        email: document.getElementById("email").value,
+        membershipNumber: document.getElementById("membership-number").value,
+        contactNumber: 
+
+document.getElementById("contact-number").value,
+        comments: document.getElementById("comments").value,
+      };
+      
+      clients.push(client);
+      alert("Client details saved!");
+      resetClientDetailsForm();
+    }
+
+    // Reset the client details form
+    function resetClientDetailsForm() {
+      document.getElementById("name").value = '';
+      document.getElementById("surname").value = '';
+      document.getElementById("id-
+
+number").value = '';
+      document.getElementById("email").value = '';
+      document.getElementById("membership-number").value = '';
+      document.getElementById("contact-number").value = '';
+      document.getElementById("comments").value = '';
+    }
+
+    // Search Leads
+    function searchLeads() {
+      const searchQuery = document.getElementById("search").value.toLowerCase();
+      const filteredLeads = clients.filter(client => {
+
+        return (
+          client.name.toLowerCase().includes(searchQuery) ||
+          client.surname.toLowerCase().includes(searchQuery) ||
+          client.idNumber.toLowerCase().includes(searchQuery) ||
+          client.email.toLowerCase().includes(searchQuery) ||
+          client.contactNumber.toLowerCase().includes(searchQuery) ||
+          client.membershipNumber.toLowerCase().includes(searchQuery)
+        );
+      });
+
+      displayLeads(filteredLeads);
+    }
+
+    // Display leads in the "My Leads" section
+    function displayLeads(leads) {
+      const leadsList = document.getElementById("leads-list");
+      leadsList.innerHTML = '';
+
+      leads.forEach(lead => {
+        const leadItem = document.createElement('li');
+        leadItem.classList.add('lead-item');
+        leadItem.innerHTML = `
+          <div>
+            <strong>${lead.name} ${lead.surname}</strong><br>
+            ID: ${lead.idNumber}<br>
+            Email: ${lead.email}<br>
+            Contact: ${lead.contactNumber}
+          </div>
+
+          <button onclick="viewLead('${lead.idNumber}')">View</button>
+        `;
+        leadsList.appendChild(leadItem);
+      });
+    }
+
+    // View lead details (can be expanded to display more info)
+    function viewLead(idNumber) {
+      const lead = clients.find(client => client.idNumber === idNumber);
+      if (lead) {
+        alert(`
+          Name: ${lead.name} ${lead.surname}\n
+          ID: ${lead.idNumber}\n
+          Email: ${lead.email}\n
+          Membership Number: ${lead.membershipNumber}\n
+          Contact: ${lead.contactNumber}\n
+
+          Comments: ${lead.comments}
+        `);
+      }
+    }
+  </script>
+</body>
+</html>
